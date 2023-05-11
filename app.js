@@ -1,38 +1,38 @@
-const express = require('express');
-const hbs = require('hbs');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const puerto = process.env.PORT || 3000;
+const express = require("express");
+const hbs = require("hbs");
+const bodyParser = require("body-parser");
+const cors = require("cors"); 
+const port = process.env.PORT || 3000;
 
 const app = express();
 
 app.set('view engine','hbs');
-hbs.registerPartials(__dirname + '/views/partials',()=>{});
+hbs.registerPartials(__dirname + '/view',()=>{});
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extenden : true}));
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 
-//Definir rutas: login, categorias, index y Not Found
-//GETS o POST
-
-app.get('/',(req,res)=>{
-    res.render('index');    
+//Definir las Rutas - Para el cliente: login, categorias, index, not found
+//GET o POST
+app.get('/',(req, res)=>{
+    res.render('index')
 })
-
-app.get('/login',(req,res)=>{
-    res.render('signin-one');
+app.get('/login',(req, res)=>{
+    res.render('signin-one')
 })
-
-app.get('/categorias',(req,res)=>{
-    res.render('advance-table');    
+app.get('/registro',(req, res)=>{
+    res.render('registro-animales')
 })
-
-app.get('*',(req,res)=>{
-    res.render('404');
+app.get('*',(req, res)=>{
+    res.render('404')
 })
+//Advanced Tables
+//sign in one
+//404
 
-//Definir puerto en que se escuchan solicitudes
-app.listen(puerto,()=>{
-    console.log('El servidor esta corriendo en el puero: ' ,puerto);    
-})
+//Definir puerto en el que se escucha solucitudes
+app.listen(port,()=>{
+    console.log('El servidor express esta corriendo en el puerto: ',port);
+}) 
